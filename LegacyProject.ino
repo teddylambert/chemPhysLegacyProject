@@ -56,8 +56,8 @@ void loop() {
     if (reading != buttonState) {
       buttonState = reading;
 
-      if (buttonState == HIGH) { //explain difference between = and ==
-        //ledTestState = !ledTestState;
+      if (buttonState == HIGH) { 
+        //ledTestState = !ledTestState; //Debug code--turn on to make sure the button is registering
         playMusic();
       }
     }
