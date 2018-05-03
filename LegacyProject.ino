@@ -70,7 +70,7 @@ void loop() {
 
 void musicPlayerBoot() {
   
-  if (! musicPlayer.begin()) { // initialise the music player
+  if (! musicPlayer.begin()) { // initialize the music player
      Serial.println(F("Couldn't find VS1053, do you have the right pins defined?"));
      while (1);
   }
