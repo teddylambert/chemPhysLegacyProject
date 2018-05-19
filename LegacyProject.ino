@@ -1,3 +1,4 @@
+//Green wire is 5V, white is GND (for LED)
 //Part of my presentation should be explaining each part of my code
 
 #include <SPI.h>
@@ -7,17 +8,17 @@
 #define buttonInput 2 //need a 10k resistor between button and GND (resistor helps with white noise)
 #define ledTestPin 13
 #define randPin A0
-#define numTracks 11 //SWITCH DEPENDING ON NUM OF AUDIO FILES RECIEVED
+#define numTracks 5 //SWITCH DEPENDING ON NUM OF AUDIO FILES RECIEVED
 
-#define SHIELD_RESET  -1      
-#define SHIELD_CS     7      
-#define SHIELD_DCS    6  
+#define BREAKOUT_RESET  9     
+#define BREAKOUT_CS     10     
+#define BREAKOUT_DCS    8      
 
 #define CARDCS 4    
 #define DREQ 3       
 
 Adafruit_VS1053_FilePlayer musicPlayer = 
-  Adafruit_VS1053_FilePlayer(SHIELD_RESET, SHIELD_CS, SHIELD_DCS, DREQ, CARDCS);
+  Adafruit_VS1053_FilePlayer(BREAKOUT_RESET, BREAKOUT_CS, BREAKOUT_DCS, DREQ, CARDCS);
 
 int ledTestState = HIGH;
 int buttonState;
@@ -56,8 +57,8 @@ void loop() {
     if (reading != buttonState) {
       buttonState = reading;
 
-      if (buttonState == HIGH) { 
-        //ledTestState = !ledTestState; //Debug code--turn on to make sure the button is registering
+      if (buttonState == HIGH) { //explain difference between = and ==
+        ledTestState = !ledTestState;
         playMusic();
       }
     }
@@ -70,7 +71,7 @@ void loop() {
 
 void musicPlayerBoot() {
   
-  if (! musicPlayer.begin()) { // initialize the music player
+  if (! musicPlayer.begin()) { // initialise the music player
      Serial.println(F("Couldn't find VS1053, do you have the right pins defined?"));
      while (1);
   }
@@ -103,4 +104,3 @@ void playMusic() {
   }
   musicPlayer.playFullFile(track); 
 }
-
