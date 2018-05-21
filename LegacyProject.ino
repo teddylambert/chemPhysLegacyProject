@@ -1,11 +1,10 @@
 //Green wire is 5V, white is GND (for LED)
-//Part of my presentation should be explaining each part of my code
 
 #include <SPI.h>
 #include <Adafruit_VS1053.h>
 #include <SD.h>
 
-#define buttonInput 2 //need a 10k resistor between button and GND (resistor helps with white noise)
+#define buttonInput 2 
 #define ledTestPin 13
 #define randPin A0
 #define numTracks 5 //SWITCH DEPENDING ON NUM OF AUDIO FILES RECIEVED
@@ -57,7 +56,7 @@ void loop() {
     if (reading != buttonState) {
       buttonState = reading;
 
-      if (buttonState == HIGH) { //explain difference between = and ==
+      if (buttonState == HIGH) { 
         ledTestState = !ledTestState;
         playMusic();
       }
@@ -71,7 +70,7 @@ void loop() {
 
 void musicPlayerBoot() {
   
-  if (! musicPlayer.begin()) { // initialise the music player
+  if (! musicPlayer.begin()) { // initialize the music player
      Serial.println(F("Couldn't find VS1053, do you have the right pins defined?"));
      while (1);
   }
